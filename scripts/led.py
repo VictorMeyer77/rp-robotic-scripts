@@ -1,8 +1,12 @@
 """
 
-* resistance - RPI 9 - BB (-1)
-
-* note: anode (long leg of the led) should connect to the positive circuit, cathode to the negative (ground)
+                        RASPBERRY   |   BREADBOARD
+Dupont wire M/F         GPIO 11     |   16 A
+Dupont wire M/F         GPIO 9      |   10 A
+Resistance Right           X        |   15 D
+Resistance Left            X        |   10 D
+Led anode                  X        |   16 C
+Led cathode                X        |   15 C
 
 """
 

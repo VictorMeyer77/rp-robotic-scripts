@@ -37,6 +37,7 @@ def shutdown(char_lcd):
 
 
 if __name__ == "__main__":
+    GPIO.setwarnings(False)
     lcd = CharLCD(cols=16,
                   rows=2,
                   pin_rs=37,

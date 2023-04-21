@@ -3,8 +3,7 @@
                         RASPBERRY   |   BREADBOARD
 Dupont wire M/F         GPIO 11     |   16 A
 Dupont wire M/F         GPIO 9      |   10 A
-Resistance Right           X        |   15 D
-Resistance Left            X        |   10 D
+Resistance                 X        |   10 D - 15 D
 Led anode                  X        |   16 C
 Led cathode                X        |   15 C
 

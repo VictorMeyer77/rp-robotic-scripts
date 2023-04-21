@@ -11,7 +11,7 @@ lcd = CharLCD(cols=16,
               numbering_mode=GPIO.BOARD,
               auto_linebreaks=True)
 
-lcd.write_string("HELLO,\n\rWORLD !!!! 😀")
+lcd.write_string("HELLO,\n\rWORLD !!!! 😀".encode("utf-8"))
 time.sleep(5)
 lcd.clear()
 GPIO.cleanup()

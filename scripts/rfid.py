@@ -16,6 +16,7 @@ while True:
     (error, tag_type) = rc522.request()
 
     if not error:
+        print(tag_type)
         (error, uid) = rc522.anticoll()
 
         if not error:

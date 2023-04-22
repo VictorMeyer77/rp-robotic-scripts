@@ -2,6 +2,16 @@ import RPi.GPIO as GPIO
 from pirc522 import RFID
 import time
 
+USER = (
+    ("user_a", [12, 78, 12, 99, 11, 89]),
+    ("user_b", [9, 72, 17, 99, 11, 82]),
+)
+
+
+def authentication(user_list, badge_uid):
+    match_user = list(filter(lambda user: user[1] == badge_uid, user_list))
+    return "" if match_user == [] else match_user[0][0]
+
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
@@ -21,4 +31,11 @@ while True:
 
         if not error:
             print("Vous avez passé le badge avec l'id : {}".format(uid))
+
+            user = authentication(USER, uid)
+            if user == "":
+                print("Vous êtes inconnu, dégagez !")
+            else:
+                print(f"Bonjour {user}")
+
             time.sleep(1)

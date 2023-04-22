@@ -13,29 +13,23 @@ def authentication(user_list, badge_uid):
     return "" if match_user == [] else match_user[0][0]
 
 
-GPIO.setmode(GPIO.BOARD)
-GPIO.setwarnings(False)
-
-rc522 = RFID()
-
-print("En attente d'un badge (pour quitter, Ctrl + c): ")
-
-while True:
-
-    rc522.wait_for_tag()
+def read_badge(user_list):
     (error, tag_type) = rc522.request()
-
     if not error:
-        print(tag_type)
         (error, uid) = rc522.anticoll()
-
         if not error:
-            print("Vous avez passé le badge avec l'id : {}".format(uid))
-
-            user = authentication(USER, uid)
+            user = authentication(user_list, uid)
             if user == "":
-                print("Vous êtes inconnu, dégagez !")
+                print("Unknown badge, get out !")
             else:
-                print(f"Bonjour {user}")
-
+                print(f"Hello {user} !")
             time.sleep(1)
+
+
+if __name__ == "__main__":
+    GPIO.setmode(GPIO.BOARD)
+    GPIO.setwarnings(False)
+    rc522 = RFID()
+    print("Waiting for badge (Quit: Ctrl + c): ")
+    while True:
+        read_badge(USER)

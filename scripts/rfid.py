@@ -1,3 +1,18 @@
+"""
+
+                        RASPBERRY   |   BREADBOARD  |
+RFID                         X      | 30 D <-> 37 D |
+Dupont wire M/F          GPIO 24    |     3O A      |
+Dupont wire M/F          GPIO 23    |     31 A      |
+Dupont wire M/F          GPIO 22    |     36 A      |
+Dupont wire M/F          GPIO 21    |     33 A      |
+Dupont wire M/F          GPIO 20    |     35 A      |
+Dupont wire M/F          GPIO 19    |     32 A      |
+Dupont wire M/F          GPIO 18    |     34 A      |
+Dupont wire M/F          GPIO 17    |     37 A      |
+
+"""
+
 import RPi.GPIO as GPIO
 from pirc522 import RFID
 import time

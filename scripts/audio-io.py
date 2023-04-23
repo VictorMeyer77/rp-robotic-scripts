@@ -1,39 +1,22 @@
 
 """
 
-system library: sudo apt-get install libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev gir1.2-gtk-4.0
+system library: sudo apt-get install libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev ///gir1.2-gtk-4.0
 
 """
 
-
-from pvrecorder import PvRecorder
 import speech_recognition as sr
 from playsound import playsound
-import struct
-import wave
 import gtts
+import subprocess
 
 PATH = "resources/output/audio/micro/audio_buffer.wav"
-
-
-def save_audio(output_path, audio):
-    with wave.open(output_path, "w") as f:
-        f.setparams((1, 2, 16000, 512, "NONE", "NONE"))
-        f.writeframes(struct.pack("h" * len(audio), *audio))
+RECORD_COMMAND_PATTERN = "arecord --format=cd -d 3 {}"
 
 
 def run_ear(output_path):
-    recorder = PvRecorder(device_index=-1, frame_length=512)
-    audio = []
-    try:
-        recorder.start()
-        while True:
-            frame = recorder.read()
-            audio.extend(frame)
-    except KeyboardInterrupt:
-        recorder.stop()
-        save_audio(output_path, audio)
-    recorder.delete()
+    process = subprocess.Popen(RECORD_COMMAND_PATTERN.format(output_path), shell=True)
+    process.communicate()
 
 
 def recognize_input(path):

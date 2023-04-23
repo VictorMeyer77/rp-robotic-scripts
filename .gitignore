@@ -130,4 +130,4 @@ dmypy.json
 
 # rp-robotic-scripts
 
-resources/output/audio/micro/*
+resources/output/audio/micro/*.wav

@@ -1,21 +1,21 @@
 
 """
 
-system library: sudo apt-get install libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev ///gir1.2-gtk-4.0
+system library: sudo apt-get install libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev flac vlc
 
 """
 
 import speech_recognition as sr
-from playsound import playsound
 import gtts
 import subprocess
 
 PATH = "resources/output/audio/micro/audio_buffer.wav"
-RECORD_COMMAND_PATTERN = "arecord --format=cd -d 3 {}"
+RECORD_COMMAND = "arecord -f cd -d 3 {}"
+PLAY_SOUND_COMMAND = "cvlc --play-and-exit {}"
 
 
 def run_ear(output_path):
-    process = subprocess.Popen(RECORD_COMMAND_PATTERN.format(output_path), shell=True)
+    process = subprocess.Popen(RECORD_COMMAND.format(output_path), shell=True)
     process.communicate()
 
 
@@ -27,13 +27,14 @@ def recognize_input(path):
         return text
 
 
-def say_answer_audio(answer, path, language="fr"):
+def say_answer(answer, path, language="fr"):
     tts = gtts.gTTS(answer, lang=language)
     tts.save(path)
-    playsound(path)
+    process = subprocess.Popen(PLAY_SOUND_COMMAND.format(path), shell=True)
+    process.communicate()
 
 
 if __name__ == "__main__":
     run_ear(PATH)
     words = recognize_input(PATH)
-    say_answer_audio(f"Votre réponse est: {words}", PATH)
+    say_answer(f"Votre réponse est: {words}", PATH)

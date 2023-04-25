@@ -15,9 +15,7 @@ def ultrasound_distance(gpio_trigger, gpio_echo):
         start_time = time.time()
     while GPIO.input(gpio_echo) == 1:
         stop_time = time.time()
-    distance = (stop_time - start_time) * 34300.0 / 2.0
-    distance = 0.1 if distance > 1000.0 else distance
-    return distance
+    return (stop_time - start_time) * 34300.0 / 2.0
 
 
 if __name__ == '__main__':

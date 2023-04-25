@@ -1,3 +1,19 @@
+"""
+
+                        RASPBERRY   |   BREADBOARD
+HC-SR04                     X       | 29 J <-> 32 J
+Dupont wire M/F             2       |     32 F
+Dupont wire M/F             16      |     31 F
+Dupont wire M/F             X       | 29 F -> 23 E
+Dupont wire M/F             39      |     23 B
+Dupont wire M/F             18      |     30 C
+Resistance                  X       | 23 A -> 30 A
+Resistance                  X       | 30 G -> 30 D
+
+Note: HC-SR04 in front of the outside
+
+"""
+
 import RPi.GPIO as GPIO
 import time
 

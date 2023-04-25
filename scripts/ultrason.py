@@ -16,20 +16,20 @@ def distance():
     time.sleep(0.00001)
     GPIO.output(GPIO_TRIGGER, False)
 
-    StartTime = time.time()
-    StopTime = time.time()
+    start_time = time.time()
+    stop_time = time.time()
 
     while GPIO.input(GPIO_ECHO) == 0:
-        StartTime = time.time()
+        start_time = time.time()
 
     while GPIO.input(GPIO_ECHO) == 1:
-        StopTime = time.time()
+        stop_time = time.time()
 
-    TimeElapsed = StopTime - StartTime
+    time_elapsed = stop_time - start_time
 
-    distance = (TimeElapsed * 34300) / 2
+    print(f"{time_elapsed}   {start_time}   {stop_time}")
 
-    return distance
+    return (time_elapsed * 34300) / 2
 
 
 if __name__ == '__main__':

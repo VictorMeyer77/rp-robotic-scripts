@@ -5,7 +5,7 @@ GPIO_TRIGGER = 16
 GPIO_ECHO = 18
 
 
-def distance(gpio_trigger, gpio_echo):
+def ultrasound_distance(gpio_trigger, gpio_echo):
     GPIO.output(gpio_trigger, True)
     time.sleep(0.00001)
     GPIO.output(gpio_trigger, False)
@@ -15,9 +15,9 @@ def distance(gpio_trigger, gpio_echo):
         start_time = time.time()
     while GPIO.input(gpio_echo) == 1:
         stop_time = time.time()
-    dist = (stop_time - start_time) * 34300.0 / 2.0
-    dist = 0.001 if dist > 1000.0 else dist
-    return dist
+    distance = (stop_time - start_time) * 34300.0 / 2.0
+    distance = 0.1 if distance > 1000.0 else distance
+    return distance
 
 
 if __name__ == '__main__':
@@ -28,8 +28,7 @@ if __name__ == '__main__':
 
     try:
         while True:
-            dist = distance(GPIO_TRIGGER, GPIO_ECHO)
-            print("Distance = %.1f cm" % dist)
+            print("Distance = {:.1f}cm".format(ultrasound_distance(GPIO_TRIGGER, GPIO_ECHO)))
             time.sleep(1)
     except KeyboardInterrupt:
         GPIO.cleanup()

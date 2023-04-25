@@ -28,7 +28,7 @@ if __name__ == '__main__':
 
     try:
         while True:
-            print("Distance = {:.1f}cm".format(ultrasound_distance(GPIO_TRIGGER, GPIO_ECHO)))
+            print("Distance = {:.1f} cm".format(ultrasound_distance(GPIO_TRIGGER, GPIO_ECHO)))
             time.sleep(1)
     except KeyboardInterrupt:
         GPIO.cleanup()

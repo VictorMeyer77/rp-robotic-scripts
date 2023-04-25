@@ -28,8 +28,8 @@ if __name__ == '__main__':
 
     try:
         while True:
-            distance = distance(GPIO_TRIGGER, GPIO_ECHO)
-            print("Distance = %.1f cm" % distance)
+            dist = distance(GPIO_TRIGGER, GPIO_ECHO)
+            print("Distance = %.1f cm" % dist)
             time.sleep(1)
     except KeyboardInterrupt:
         GPIO.cleanup()

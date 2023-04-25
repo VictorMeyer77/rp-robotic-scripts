@@ -1,45 +1,35 @@
 import RPi.GPIO as GPIO
 import time
 
-GPIO.setmode(GPIO.BOARD)
-
 GPIO_TRIGGER = 16
 GPIO_ECHO = 18
 
-GPIO.setup(GPIO_TRIGGER, GPIO.OUT)
-GPIO.setup(GPIO_ECHO, GPIO.IN)
 
-
-def distance():
-
-    GPIO.output(GPIO_TRIGGER, True)
+def distance(gpio_trigger, gpio_echo):
+    GPIO.output(gpio_trigger, True)
     time.sleep(0.00001)
-    GPIO.output(GPIO_TRIGGER, False)
-
+    GPIO.output(gpio_trigger, False)
     start_time = time.time()
     stop_time = time.time()
-
-    while GPIO.input(GPIO_ECHO) == 0:
+    while GPIO.input(gpio_echo) == 0:
         start_time = time.time()
-
-    while GPIO.input(GPIO_ECHO) == 1:
+    while GPIO.input(gpio_echo) == 1:
         stop_time = time.time()
-
-    time_elapsed = stop_time - start_time
-
-    print(f"{time_elapsed}   {start_time}   {stop_time}")
-
-    return (time_elapsed * 34300) / 2
+    dist = (stop_time - start_time) * 34300 / 2
+    dist = 0.001 if dist > 1000 else dist
+    return dist
 
 
 if __name__ == '__main__':
+
+    GPIO.setmode(GPIO.BOARD)
+    GPIO.setup(GPIO_TRIGGER, GPIO.OUT)
+    GPIO.setup(GPIO_ECHO, GPIO.IN)
+
     try:
         while True:
-            dist = distance()
-            print("Measured Distance = %.1f cm" % dist)
+            distance = distance(GPIO_TRIGGER, GPIO_ECHO)
+            print("Distance = %.1f cm" % distance)
             time.sleep(1)
-
-        # Reset by pressing CTRL + C
     except KeyboardInterrupt:
-        print("Measurement stopped by User")
         GPIO.cleanup()

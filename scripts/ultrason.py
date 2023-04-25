@@ -15,8 +15,8 @@ def distance(gpio_trigger, gpio_echo):
         start_time = time.time()
     while GPIO.input(gpio_echo) == 1:
         stop_time = time.time()
-    dist = (stop_time - start_time) * 34300 / 2
-    dist = 0.001 if dist > 1000 else dist
+    dist = (stop_time - start_time) * 34300.0 / 2.0
+    dist = 0.001 if dist > 1000.0 else dist
     return dist
 
 

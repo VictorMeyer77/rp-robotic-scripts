@@ -19,6 +19,7 @@ if __name__ == "__main__":
 """
 camera = PiCamera()
 camera.resolution = (64, 64)
+camera.color_effects = (128, 128)
 camera.start_preview()
 # Camera warm-up time
 sleep(2)
